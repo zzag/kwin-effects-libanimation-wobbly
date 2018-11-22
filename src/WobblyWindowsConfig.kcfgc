@@ -1,0 +1,4 @@
+File=options.kcfg
+ClassName=WobblyWindowsConfig
+Singleton=true
+Mutators=true

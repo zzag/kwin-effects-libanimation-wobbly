@@ -1,0 +1,20 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "vladzzag@gmail.com",
+                "Name": "Vlad Zagorodniy"
+            }
+        ],
+        "Category": "Candy",
+        "Description": "Libanimation-based wobbly windows",
+        "EnabledByDefault": false,
+        "Icon": "preferences-system-windows-effect-libanimation-wobbly",
+        "Id": "kwin4_effect_libanimation_wobbly",
+        "License": "GPL",
+        "Name": "Wobbly Windows",
+        "ServiceTypes": [
+            "KWin/Effect"
+        ]
+    }
+}
