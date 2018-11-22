@@ -1,0 +1,21 @@
+# Maintainer: Vlad Zagorodniy <vladzzag@gmail.com>
+pkgname=libanimation
+pkgver=3.5.1
+pkgrel=1
+pkgdesc="Wobbly windows logic split out from Compiz"
+arch=(x86_64)
+url="https://github.com/endlessm/libanimation"
+license=('LGPL')
+depends=(glib2)
+makedepends=(meson)
+source=("$pkgname-$pkgver.tar.gz"::"https://github.com/endlessm/libanimation/archive/Release_$pkgver.tar.gz")
+sha256sums=('1e09ae90fcdfafcf1d9cf4c906f86d9c45ae938c8bb0727b6e4b985155f3d119')
+
+build() {
+    arch-meson "$pkgname-Release_$pkgver" build
+    ninja -v -C build
+}
+
+package() {
+    DESTDIR="${pkgdir}" ninja -C build install
+}
