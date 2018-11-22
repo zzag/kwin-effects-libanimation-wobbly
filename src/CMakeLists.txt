@@ -12,6 +12,7 @@ find_package (KF5 REQUIRED COMPONENTS
 )
 
 find_package (KWinEffects REQUIRED)
+find_package (Libanimation REQUIRED)
 
 set (effect_SRCS
     plugin.cc
@@ -33,6 +34,7 @@ target_link_libraries (kwin4_effect_libanimation_wobbly
         KF5::CoreAddons
         KF5::WindowSystem
         KWinEffects::KWinEffects
+        Libanimation::Libanimation
 )
 
 install (
