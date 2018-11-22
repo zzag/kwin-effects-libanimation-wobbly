@@ -1,0 +1,16 @@
+diff -Naur a/animation/meson.build b/animation/meson.build
+--- a/animation/meson.build	2018-08-30 22:26:37.000000000 +0300
++++ b/animation/meson.build	2018-11-23 00:25:08.902720611 +0200
+@@ -39,6 +39,12 @@
+   include_directories: [ animation_inc ],
+ )
+ 
++install_headers(
++  'geometry.h',
++  'geometry_traits.h',
++  subdir: animation_headers_subdir
++)
++
+ pkg = import('pkgconfig')
+ pkg.generate(
+   description: 'Library to provide 2D surface animations',

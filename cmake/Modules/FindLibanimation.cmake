@@ -46,6 +46,7 @@ if (Libanimation_FOUND)
         IMPORTED_LOCATION "${Libanimation_LIBRARY}"
         INTERFACE_COMPILE_OPTIONS "${Libanimation_DEFINITIONS}"
         INTERFACE_INCLUDE_DIRECTORIES "${Libanimation_INCLUDE_DIR}"
+        INTERFACE_INCLUDE_DIRECTORIES "${Libanimation_INCLUDE_DIR}/animation"
     )
 endif ()
 

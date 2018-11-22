@@ -8,8 +8,15 @@ url="https://github.com/endlessm/libanimation"
 license=('LGPL')
 depends=(glib2)
 makedepends=(meson)
-source=("$pkgname-$pkgver.tar.gz"::"https://github.com/endlessm/libanimation/archive/Release_$pkgver.tar.gz")
-sha256sums=('1e09ae90fcdfafcf1d9cf4c906f86d9c45ae938c8bb0727b6e4b985155f3d119')
+source=("$pkgname-$pkgver.tar.gz"::"https://github.com/endlessm/libanimation/archive/Release_$pkgver.tar.gz",
+        "install-geometry-headers.diff")
+sha256sums=('1e09ae90fcdfafcf1d9cf4c906f86d9c45ae938c8bb0727b6e4b985155f3d119'
+            '22e4fe4d0baac4b9a5ddead4be9d1d9c83ae9917a7cca580bb84d330a50d5c72')
+
+prepare() {
+    cd "$pkgname-Release_$pkgver"
+    patch -Np1 < "$srcdir/install-geometry-headers.diff"
+}
 
 build() {
     arch-meson "$pkgname-Release_$pkgver" build
