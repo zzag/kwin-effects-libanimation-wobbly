@@ -24,6 +24,13 @@
 WobblyWindowsEffect::WobblyWindowsEffect()
 {
     reconfigure(ReconfigureAll);
+
+    connect(KWin::effects, &KWin::EffectsHandler::windowStartUserMovedResized,
+        this, &WobblyWindowsEffect::slotWindowStartUserMovedResized);
+    connect(KWin::effects, &KWin::EffectsHandler::windowStepUserMovedResized,
+        this, &WobblyWindowsEffect::slotWindowStepUserMovedResized);
+    connect(KWin::effects, &KWin::EffectsHandler::windowFinishUserMovedResized,
+        this, &WobblyWindowsEffect::slotWindowFinishUserMovedResized);
 }
 
 WobblyWindowsEffect::~WobblyWindowsEffect()
@@ -64,5 +71,21 @@ void WobblyWindowsEffect::paintWindow(KWin::EffectWindow* w, int mask, QRegion r
 
 bool WobblyWindowsEffect::isActive() const
 {
-    return false;
+    return !m_animations.isEmpty();
+}
+
+void WobblyWindowsEffect::slotWindowStartUserMovedResized(KWin::EffectWindow* w)
+{
+    Q_UNUSED(w)
+}
+
+void WobblyWindowsEffect::slotWindowStepUserMovedResized(KWin::EffectWindow* w, const QRect& geometry)
+{
+    Q_UNUSED(w)
+    Q_UNUSED(geometry)
+}
+
+void WobblyWindowsEffect::slotWindowFinishUserMovedResized(KWin::EffectWindow* w)
+{
+    Q_UNUSED(w)
 }

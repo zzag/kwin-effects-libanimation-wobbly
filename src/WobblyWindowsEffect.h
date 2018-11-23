@@ -20,6 +20,9 @@
 // kwineffects
 #include <kwineffects.h>
 
+// libanimation
+#include <wobbly/wobbly.h>
+
 class WobblyWindowsEffect : public KWin::Effect {
     Q_OBJECT
 
@@ -38,11 +41,23 @@ public:
     bool isActive() const override;
     int requestedEffectChainPosition() const override;
 
+private Q_SLOTS:
+    void slotWindowStartUserMovedResized(KWin::EffectWindow* w);
+    void slotWindowStepUserMovedResized(KWin::EffectWindow* w, const QRect& geometry);
+    void slotWindowFinishUserMovedResized(KWin::EffectWindow* w);
+
 private:
     int m_gridResolution;
     qreal m_springConstant;
     qreal m_friction;
     qreal m_maximumRange;
+
+    struct AnimationData {
+        QSharedPointer<wobbly::Model> model;
+        QSharedPointer<wobbly::Anchor> grabAnchor;
+    };
+
+    QHash<KWin::EffectWindow*, AnimationData> m_animations;
 };
 
 inline int WobblyWindowsEffect::requestedEffectChainPosition() const
