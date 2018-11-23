@@ -49,9 +49,7 @@ private Q_SLOTS:
 
 private:
     int m_gridResolution;
-    qreal m_springConstant;
-    qreal m_friction;
-    qreal m_maximumRange;
+    wobbly::Model::Settings m_settings;
 
     struct AnimationData {
         QSharedPointer<wobbly::Model> model;

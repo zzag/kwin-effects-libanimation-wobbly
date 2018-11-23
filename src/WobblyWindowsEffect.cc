@@ -46,9 +46,9 @@ void WobblyWindowsEffect::reconfigure(ReconfigureFlags flags)
     WobblyWindowsConfig::self()->read();
 
     m_gridResolution = WobblyWindowsConfig::gridResolution();
-    m_springConstant = WobblyWindowsConfig::springConstant();
-    m_friction = WobblyWindowsConfig::friction();
-    m_maximumRange = WobblyWindowsConfig::maximumRange();
+    m_settings.springConstant = WobblyWindowsConfig::springConstant();
+    m_settings.friction = WobblyWindowsConfig::friction();
+    m_settings.maximumRange = WobblyWindowsConfig::maximumRange();
 }
 
 void WobblyWindowsEffect::prePaintScreen(KWin::ScreenPrePaintData& data, int time)
@@ -67,6 +67,16 @@ void WobblyWindowsEffect::postPaintScreen()
     auto animationIt = m_animations.begin();
     while (animationIt != m_animations.end()) {
         if ((*animationIt).stable && (*animationIt).destroyable) {
+            KWin::EffectWindow* w = animationIt.key();
+            const QRectF geometry = w->geometry();
+            const QRectF expandedGeometry = w->expandedGeometry();
+
+            const qreal paddingX = geometry.x() - expandedGeometry.x();
+            const qreal paddingY = geometry.y() - expandedGeometry.y();
+
+            const QPointF pos = QPointF((*animationIt).model->Extremes().front().x, (*animationIt).model->Extremes().front().y);
+
+            KWin::effects->moveWindow(w, (pos + QPointF(paddingX, paddingY)).toPoint());
             animationIt = m_animations.erase(animationIt);
         } else {
             ++animationIt;
@@ -135,17 +145,11 @@ void WobblyWindowsEffect::slotWindowStartUserMovedResized(KWin::EffectWindow* w)
 
     if (!data.model) {
         const QRectF expandedGeometry = w->expandedGeometry();
-
-        wobbly::Model::Settings settings;
-        settings.springConstant = m_springConstant;
-        settings.friction = m_friction;
-        settings.maximumRange = m_maximumRange;
-
         data.model.reset(new wobbly::Model(
             wobbly::Point(expandedGeometry.x(), expandedGeometry.y()),
             expandedGeometry.width(),
             expandedGeometry.height(),
-            settings));
+            m_settings));
     }
 
     const QPointF grabPosition = cursorPos();
