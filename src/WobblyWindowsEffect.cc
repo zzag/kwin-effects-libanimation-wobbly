@@ -59,6 +59,7 @@ void WobblyWindowsEffect::prePaintScreen(KWin::ScreenPrePaintData& data, int tim
 {
     for (AnimationData& data : m_animations) {
         if (!data.stable) {
+            // TODO: Don't truncate to 16ms.
             data.stable = !data.model->Step(qMin(time, 16));
         }
     }
