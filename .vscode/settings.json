@@ -6,4 +6,7 @@
     // your User Settings json file, e.g.
     // "C_Cpp.clang_format_path": "/usr/bin/clang-format",
     "editor.formatOnSave": true,
+    "files.associations": {
+        "*.moc": "cpp"
+    },
 }

@@ -56,6 +56,9 @@ private:
     struct AnimationData {
         QSharedPointer<wobbly::Model> model;
         QSharedPointer<wobbly::Anchor> grabAnchor;
+        QPointF lastGrabPosition;
+        bool stable;
+        bool destroyable;
     };
 
     QHash<KWin::EffectWindow*, AnimationData> m_animations;
