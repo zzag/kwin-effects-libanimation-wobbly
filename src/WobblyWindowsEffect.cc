@@ -41,3 +41,28 @@ void WobblyWindowsEffect::reconfigure(ReconfigureFlags flags)
     m_friction = WobblyWindowsConfig::friction();
     m_maximumRange = WobblyWindowsConfig::maximumRange();
 }
+
+void WobblyWindowsEffect::prePaintScreen(KWin::ScreenPrePaintData& data, int time)
+{
+    KWin::effects->prePaintScreen(data, time);
+}
+
+void WobblyWindowsEffect::postPaintScreen()
+{
+    KWin::effects->postPaintScreen();
+}
+
+void WobblyWindowsEffect::prePaintWindow(KWin::EffectWindow* w, KWin::WindowPrePaintData& data, int time)
+{
+    KWin::effects->prePaintWindow(w, data, time);
+}
+
+void WobblyWindowsEffect::paintWindow(KWin::EffectWindow* w, int mask, QRegion region, KWin::WindowPaintData& data)
+{
+    KWin::effects->paintWindow(w, mask, region, data);
+}
+
+bool WobblyWindowsEffect::isActive() const
+{
+    return false;
+}
