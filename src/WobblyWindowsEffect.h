@@ -45,6 +45,8 @@ private Q_SLOTS:
     void slotWindowStartUserMovedResized(KWin::EffectWindow* w);
     void slotWindowStepUserMovedResized(KWin::EffectWindow* w, const QRect& geometry);
     void slotWindowFinishUserMovedResized(KWin::EffectWindow* w);
+    void slotWindowGeometryShapeChanged(KWin::EffectWindow* w, const QRect& old);
+    void slotWindowMaximizedStateChanged(KWin::EffectWindow* w, bool horizontal, bool vertical);
     void slotWindowDeleted(KWin::EffectWindow* w);
 
 private:

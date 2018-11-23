@@ -31,6 +31,10 @@ WobblyWindowsEffect::WobblyWindowsEffect()
         this, &WobblyWindowsEffect::slotWindowStepUserMovedResized);
     connect(KWin::effects, &KWin::EffectsHandler::windowFinishUserMovedResized,
         this, &WobblyWindowsEffect::slotWindowFinishUserMovedResized);
+    connect(KWin::effects, &KWin::EffectsHandler::windowGeometryShapeChanged,
+        this, &WobblyWindowsEffect::slotWindowGeometryShapeChanged);
+    connect(KWin::effects, &KWin::EffectsHandler::windowMaximizedStateChanged,
+        this, &WobblyWindowsEffect::slotWindowMaximizedStateChanged);
     connect(KWin::effects, &KWin::EffectsHandler::windowDeleted,
         this, &WobblyWindowsEffect::slotWindowDeleted);
 }
@@ -203,6 +207,19 @@ void WobblyWindowsEffect::slotWindowFinishUserMovedResized(KWin::EffectWindow* w
 
     // TODO: Don't do full repaints.
     KWin::effects->addRepaintFull();
+}
+
+void WobblyWindowsEffect::slotWindowGeometryShapeChanged(KWin::EffectWindow* w, const QRect& old)
+{
+    Q_UNUSED(w)
+    Q_UNUSED(old)
+}
+
+void WobblyWindowsEffect::slotWindowMaximizedStateChanged(KWin::EffectWindow* w, bool horizontal, bool vertical)
+{
+    Q_UNUSED(w)
+    Q_UNUSED(horizontal)
+    Q_UNUSED(vertical)
 }
 
 void WobblyWindowsEffect::slotWindowDeleted(KWin::EffectWindow* w)
