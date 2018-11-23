@@ -4,5 +4,24 @@
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
                           http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
     <kcfgfile name="kwinrc"/>
-    <group name="Effect-LibanimationWobblyWindows"/>
+    <group name="Effect-LibanimationWobblyWindows">
+        <entry name="GridResolution" type="Int">
+            <default>20</default>
+            <min>1</min>
+        </entry>
+        <entry name="Friction" type="Double">
+            <default>3.0</default>
+            <min>0.1</min>
+            <max>10.0</max>
+        </entry>
+        <entry name="SpringConstant" type="Double">
+            <default>8.0</default>
+            <min>0.1</min>
+            <max>10.0</max>
+        </entry>
+        <entry name="MaximumRange" type="Double">
+            <default>500.0</default>
+            <min>0.1</min>
+        </entry>
+    </group>
 </kcfg>

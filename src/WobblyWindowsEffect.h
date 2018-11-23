@@ -27,5 +27,11 @@ public:
     WobblyWindowsEffect();
     ~WobblyWindowsEffect() override;
 
+    void reconfigure(ReconfigureFlags flags) override;
+
 private:
+    int m_gridResolution;
+    qreal m_springConstant;
+    qreal m_friction;
+    qreal m_maximumRange;
 };

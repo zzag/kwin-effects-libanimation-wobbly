@@ -18,10 +18,26 @@
 // own
 #include "WobblyWindowsEffect.h"
 
+// auto-generated
+#include "WobblyWindowsConfig.h"
+
 WobblyWindowsEffect::WobblyWindowsEffect()
 {
+    reconfigure(ReconfigureAll);
 }
 
 WobblyWindowsEffect::~WobblyWindowsEffect()
 {
+}
+
+void WobblyWindowsEffect::reconfigure(ReconfigureFlags flags)
+{
+    Q_UNUSED(flags)
+
+    WobblyWindowsConfig::self()->read();
+
+    m_gridResolution = WobblyWindowsConfig::gridResolution();
+    m_springConstant = WobblyWindowsConfig::springConstant();
+    m_friction = WobblyWindowsConfig::friction();
+    m_maximumRange = WobblyWindowsConfig::maximumRange();
 }
