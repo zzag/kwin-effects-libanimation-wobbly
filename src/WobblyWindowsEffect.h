@@ -29,9 +29,16 @@ public:
 
     void reconfigure(ReconfigureFlags flags) override;
 
+    int requestedEffectChainPosition() const override;
+
 private:
     int m_gridResolution;
     qreal m_springConstant;
     qreal m_friction;
     qreal m_maximumRange;
 };
+
+inline int WobblyWindowsEffect::requestedEffectChainPosition() const
+{
+    return 55;
+}
