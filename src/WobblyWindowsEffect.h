@@ -45,6 +45,7 @@ private Q_SLOTS:
     void slotWindowStartUserMovedResized(KWin::EffectWindow* w);
     void slotWindowStepUserMovedResized(KWin::EffectWindow* w, const QRect& geometry);
     void slotWindowFinishUserMovedResized(KWin::EffectWindow* w);
+    void slotWindowDeleted(KWin::EffectWindow* w);
 
 private:
     int m_gridResolution;

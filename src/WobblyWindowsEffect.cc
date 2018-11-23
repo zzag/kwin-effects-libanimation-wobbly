@@ -31,6 +31,8 @@ WobblyWindowsEffect::WobblyWindowsEffect()
         this, &WobblyWindowsEffect::slotWindowStepUserMovedResized);
     connect(KWin::effects, &KWin::EffectsHandler::windowFinishUserMovedResized,
         this, &WobblyWindowsEffect::slotWindowFinishUserMovedResized);
+    connect(KWin::effects, &KWin::EffectsHandler::windowDeleted,
+        this, &WobblyWindowsEffect::slotWindowDeleted);
 }
 
 WobblyWindowsEffect::~WobblyWindowsEffect()
@@ -88,4 +90,9 @@ void WobblyWindowsEffect::slotWindowStepUserMovedResized(KWin::EffectWindow* w, 
 void WobblyWindowsEffect::slotWindowFinishUserMovedResized(KWin::EffectWindow* w)
 {
     Q_UNUSED(w)
+}
+
+void WobblyWindowsEffect::slotWindowDeleted(KWin::EffectWindow* w)
+{
+    m_animations.remove(w);
 }
