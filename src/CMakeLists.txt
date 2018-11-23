@@ -14,6 +14,8 @@ find_package (KF5 REQUIRED COMPONENTS
 find_package (KWinEffects REQUIRED)
 find_package (Libanimation REQUIRED)
 
+add_subdirectory (kcm)
+
 set (effect_SRCS
     plugin.cc
     WobblyWindowsEffect.cc
