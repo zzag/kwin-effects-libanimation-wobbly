@@ -71,21 +71,21 @@ void WobblyWindowsEffect::postPaintScreen()
 {
     auto animationIt = m_animations.begin();
     while (animationIt != m_animations.end()) {
-        if ((*animationIt).stable && (*animationIt).destroyable) {
-            KWin::EffectWindow* w = animationIt.key();
-            const QRectF geometry = w->geometry();
-            const QRectF expandedGeometry = w->expandedGeometry();
-
-            const qreal paddingX = geometry.x() - expandedGeometry.x();
-            const qreal paddingY = geometry.y() - expandedGeometry.y();
-
-            const QPointF pos = QPointF((*animationIt).model->Extremes().front().x, (*animationIt).model->Extremes().front().y);
-
-            KWin::effects->moveWindow(w, (pos + QPointF(paddingX, paddingY)).toPoint());
-            animationIt = m_animations.erase(animationIt);
-        } else {
+        if (!(*animationIt).stable || !(*animationIt).destroyable) {
             ++animationIt;
+            continue;
         }
+
+        KWin::EffectWindow* w = animationIt.key();
+        const QRectF geometry = w->geometry();
+        const QRectF expandedGeometry = w->expandedGeometry();
+        const QPointF padding = geometry.topLeft() - expandedGeometry.topLeft();
+        const QPointF pos = QPointF(
+            (*animationIt).model->Extremes().front().x,
+            (*animationIt).model->Extremes().front().y);
+        KWin::effects->moveWindow(w, (pos + padding).toPoint());
+
+        animationIt = m_animations.erase(animationIt);
     }
 
     // TODO: Don't do full repaints.
